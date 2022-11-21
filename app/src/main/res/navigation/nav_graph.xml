@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment2">
+    <fragment
+        android:id="@+id/homeFragment2"
+        android:name="com.project.notesapp.UI.Fragments.HomeFragment"
+        android:label="ToDo List"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment2_to_editNotesFragment2"
+            app:destination="@id/editNotesFragment2"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
+        <action
+            android:id="@+id/action_homeFragment2_to_createNoteFragment2"
+            app:destination="@id/createNoteFragment2"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <argument
+            android:name="data"
+            app:argType="com.project.notesapp.Model.Notes" />
+    </fragment>
+    <fragment
+        android:id="@+id/createNoteFragment2"
+        android:name="com.project.notesapp.UI.Fragments.CreateNoteFragment"
+        android:label="Add a note"
+        tools:layout="@layout/fragment_create_note" >
+        <action
+            android:id="@+id/action_createNoteFragment2_to_homeFragment2"
+            app:destination="@id/homeFragment2"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/editNotesFragment2"
+        android:name="com.project.notesapp.UI.Fragments.EditNotesFragment"
+        android:label="Edit your note"
+        tools:layout="@layout/fragment_edit_notes" >
+        <action
+            android:id="@+id/action_editNotesFragment2_to_homeFragment2"
+            app:destination="@id/homeFragment2"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left" />
+        <argument
+            android:name="data"
+            app:argType="com.project.notesapp.Model.Notes" />
+    </fragment>
+</navigation>

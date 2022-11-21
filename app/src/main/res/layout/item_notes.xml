@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/fg"
+    android:elevation="10dp"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#212524"
+            android:text="Title">
+
+        </TextView>
+        <TextView
+            android:id="@+id/notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+
+            android:layout_marginTop="5dp"
+            android:textColor="#727A78"
+            android:text="Notes and also having dumy text to check how it is looking and also the feel of it">
+
+        </TextView>
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:alpha="0.5"
+            android:layout_marginTop="8dp"
+            android:textColor="#212524"
+            android:text="15 September 2022">
+
+        </TextView>
+
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/viewPriority"
+        android:layout_gravity="right"
+        android:layout_margin="5dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp">
+
+    </ImageView>
+
+</androidx.cardview.widget.CardView>
+</LinearLayout>
