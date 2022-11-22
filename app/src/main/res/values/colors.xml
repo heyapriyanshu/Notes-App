@@ -14,7 +14,7 @@
     <color name="bgLight">#bededb</color>
     <color name="fg">#D6E4E5</color>
     <color name="green">#34b532</color>
-    <color name="fgPurple">#efe5fd</color>
+    <color name="fgPurple">#D6E1F8</color>
     <color name="red"> #bb1e10</color>
     <color name="yellow">#f7b500</color>
 </resources>

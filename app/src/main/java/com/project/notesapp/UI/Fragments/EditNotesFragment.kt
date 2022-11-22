@@ -14,6 +14,7 @@ import com.project.notesapp.Model.Notes
 import com.project.notesapp.R
 import com.project.notesapp.ViewModel.NotesViewModel
 import com.project.notesapp.databinding.FragmentEditNotesBinding
+import com.project.notesapp.hideKeyboard
 import java.util.*
 
 class EditNotesFragment : Fragment() {
@@ -58,6 +59,8 @@ class EditNotesFragment : Fragment() {
         //set menu
         setHasOptionsMenu(true)
 
+        //hide keyboard
+        hideKeyboard(requireActivity())
 
         return binding.root
     }
@@ -65,8 +68,10 @@ class EditNotesFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId==R.id.menu_save){
             updateNotes()
+            hideKeyboard(requireActivity())
         }else if(item.itemId==R.id.update_menu_delete){
             deleteSelectedNote()
+            hideKeyboard(requireActivity())
         }
         return super.onOptionsItemSelected(item)
     }

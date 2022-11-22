@@ -40,4 +40,7 @@ class NotesViewModel(applicaton: Application): AndroidViewModel(applicaton) {
     fun updateNotes(notes: Notes){
         repository.updateNotes(notes)
     }
+    fun searchNotes(item:String) : LiveData<List<Notes>>{
+        return repository.searchNotes(item)
+    }
 }

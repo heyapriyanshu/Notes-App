@@ -12,6 +12,7 @@ import com.project.notesapp.Model.Notes
 import com.project.notesapp.R
 import com.project.notesapp.ViewModel.NotesViewModel
 import com.project.notesapp.databinding.FragmentCreateNoteBinding
+import com.project.notesapp.hideKeyboard
 
 
 import java.util.*
@@ -59,12 +60,14 @@ class CreateNoteFragment : Fragment() {
         //set menu
         setHasOptionsMenu(true)
 
-
+        //hide keyboard
+        hideKeyboard(requireActivity())
         return binding.root
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId==R.id.menu_ad){
+            hideKeyboard(requireActivity())
             createNotes()
         }
         return super.onOptionsItemSelected(item)

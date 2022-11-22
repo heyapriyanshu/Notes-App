@@ -25,10 +25,10 @@ interface NotesDAO {
     @Query("SELECT * FROM NOTES ORDER BY prority desc")
     fun sortByHigh() : LiveData<List<Notes>>
 
-    @Query("SELECT * FROM NOTES ORDER BY date desc")
+    @Query("SELECT * FROM NOTES ORDER BY date asc")
     fun sortByNewDate() : LiveData<List<Notes>>
 
-    @Query("SELECT * FROM NOTES ORDER BY date asc")
+    @Query("SELECT * FROM NOTES ORDER BY date desc")
     fun sortByOldDate() : LiveData<List<Notes>>
 
     @Query("SELECT * FROM NOTES ORDER BY prority asc")
@@ -42,4 +42,7 @@ interface NotesDAO {
 
     @Query("SELECT * FROM NOTES WHERE prority=3")
     fun getHighNotes() :LiveData<List<Notes>>
+
+    @Query("SELECT * FROM Notes WHERE title LIKE :searchQuery OR NOTES LIKE :searchQuery")
+    fun searchDatabase(searchQuery: String): LiveData<List<Notes>>
 }

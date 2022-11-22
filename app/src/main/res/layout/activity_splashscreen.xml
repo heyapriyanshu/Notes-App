@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@color/purple_500"
+    android:background="@color/purple_700"
     android:layout_height="match_parent"
     tools:context=".SplashScreen">
     <ImageView
@@ -17,12 +17,13 @@
     </ImageView>
 
     <ProgressBar
-        android:layout_alignParentBottom="true"
-        android:theme="@style/ProgressBar"
-        android:layout_marginBottom="40dp"
-        android:layout_marginLeft="190dp"
         android:layout_width="35dp"
-        android:layout_height="35dp">
+        android:layout_height="35dp"
+        android:layout_alignStart="@+id/splashImg"
+        android:layout_alignEnd="@+id/splashImg"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:theme="@style/ProgressBar">
 
     </ProgressBar>
 </RelativeLayout>

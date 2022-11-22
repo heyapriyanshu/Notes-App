@@ -50,8 +50,8 @@
 
             android:id="@+id/btnAddNotes"
             android:src="@drawable/ic_baseline_add_24"
-            android:backgroundTint="@color/fg"
             android:layout_margin="16dp"
+            app:backgroundTint="@color/fgPurple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

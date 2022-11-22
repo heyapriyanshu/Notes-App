@@ -42,4 +42,7 @@ class NotesRepository(val dao: NotesDAO) {
     fun sortByOldDate():LiveData<List<Notes>>{
         return dao.sortByOldDate()
     }
+    fun searchNotes(item:String): LiveData<List<Notes>> {
+        return dao.searchDatabase(item)
+    }
 }

@@ -14,7 +14,8 @@ import com.project.notesapp.R
 import com.project.notesapp.UI.Adapter.NotesAdapter
 import com.project.notesapp.ViewModel.NotesViewModel
 import com.project.notesapp.databinding.FragmentHomeBinding
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
+import com.project.notesapp.hideKeyboard
+
 
 class HomeFragment : Fragment() {
 
@@ -34,70 +35,42 @@ class HomeFragment : Fragment() {
         binding=FragmentHomeBinding.inflate(layoutInflater,container,false)
 
         viewModel.getNotes().observe(viewLifecycleOwner) { notesList ->
+
+            if(notesList.isEmpty()){
+                binding.noDataImageView.visibility = View.VISIBLE
+                binding.noDataTextView.visibility = View.VISIBLE
+            }else{
+                binding.noDataImageView.visibility = View.INVISIBLE
+                binding.noDataTextView.visibility = View.INVISIBLE
+            }
             oldMyNotes = notesList as ArrayList<Notes>
             binding.rcvAllNotes.layoutManager=StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
             notesAdapter=NotesAdapter(requireContext(),notesList)
             binding.rcvAllNotes.adapter=notesAdapter
+            binding.rcvAllNotes.scheduleLayoutAnimation()
 
-         //   viewModel.checkEmptyDB(notesList)
+
 
         }
-//        viewModel.emptyDatabase.observe(viewLifecycleOwner, Observer {
-//            showEmptyDBViews(it)
-//        })
+
         //navigating from home fragment to create fragment
 
         binding.btnAddNotes.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_homeFragment2_to_createNoteFragment2)
         }
 
-        //setup recycler view
-
-        binding.rcvAllNotes.itemAnimator=SlideInUpAnimator().apply {
-            addDuration = 300
-        }
-
-
         //set menu
         setHasOptionsMenu(true)
         return binding.root
+
+        //hide keyboard
+        hideKeyboard(requireActivity())
 
     }
 
 
 
-//    private fun swipeToDelete(rv:RecyclerView) {
-//        val swipeToDeleteCallBack= object : SwipeToDelete(){
-//            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-//                val deletedItem = adapter.dataList[viewHolder.adapterPosition]
-//                // Delete Item
-//                viewModel.deleteNotes(deletedItem)
-//                adapter.notifyItemRemoved(viewHolder.adapterPosition)
-//                // Restore Deleted Item
-//                restoreDeletedData(viewHolder.itemView, deletedItem)
-//            }
-//        }
-//        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallBack)
-//        itemTouchHelper.attachToRecyclerView(rv)
-//
-//    }
-//
-//    private fun restoreDeletedData(view: View, deletedItem: Notes) {
-//        val snackBar = Snackbar.make(
-//            view, "Deleted '${deletedItem.title}'",
-//            Snackbar.LENGTH_LONG
-//        )
-//        snackBar.setAction("Undo") {
-//            viewModel.addNotes(deletedItem)
-//        }
-//        snackBar.show()
-//    }
 
-//    private fun showEmptyDBViews(emptyDB:Boolean) {
-//        if(emptyDB){
-//            view?.
-//        }
-//    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -122,37 +95,69 @@ class HomeFragment : Fragment() {
 
     private fun sortByOldDate() {
         viewModel.sortByOldDate().observe(viewLifecycleOwner) {
+            if(it.isEmpty()){
+                binding.noDataImageView.visibility = View.VISIBLE
+                binding.noDataTextView.visibility = View.VISIBLE
+            }else{
+                binding.noDataImageView.visibility = View.INVISIBLE
+                binding.noDataTextView.visibility = View.INVISIBLE
+            }
             binding.rcvAllNotes.layoutManager =
                 StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             notesAdapter = NotesAdapter(requireContext(), it)
             binding.rcvAllNotes.adapter = notesAdapter
+            binding.rcvAllNotes.scheduleLayoutAnimation()
         }
     }
 
     private fun sortByNewDate() {
         viewModel.sortByNewDate().observe(viewLifecycleOwner) {
+            if(it.isEmpty()){
+                binding.noDataImageView.visibility = View.VISIBLE
+                binding.noDataTextView.visibility = View.VISIBLE
+            }else{
+                binding.noDataImageView.visibility = View.INVISIBLE
+                binding.noDataTextView.visibility = View.INVISIBLE
+            }
             binding.rcvAllNotes.layoutManager =
                 StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             notesAdapter = NotesAdapter(requireContext(), it)
             binding.rcvAllNotes.adapter = notesAdapter
+            binding.rcvAllNotes.scheduleLayoutAnimation()
         }
     }
 
     private fun sortByLow() {
         viewModel.sortByLow().observe(viewLifecycleOwner) {
+            if(it.isEmpty()){
+                binding.noDataImageView.visibility = View.VISIBLE
+                binding.noDataTextView.visibility = View.VISIBLE
+            }else{
+                binding.noDataImageView.visibility = View.INVISIBLE
+                binding.noDataTextView.visibility = View.INVISIBLE
+            }
             binding.rcvAllNotes.layoutManager =
                 StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             notesAdapter = NotesAdapter(requireContext(), it)
             binding.rcvAllNotes.adapter = notesAdapter
+            binding.rcvAllNotes.scheduleLayoutAnimation()
         }
     }
 
     private fun sortByHigh() {
         viewModel.sortByHigh().observe(viewLifecycleOwner) {
+            if(it.isEmpty()){
+                binding.noDataImageView.visibility = View.VISIBLE
+                binding.noDataTextView.visibility = View.VISIBLE
+            }else{
+                binding.noDataImageView.visibility = View.INVISIBLE
+                binding.noDataTextView.visibility = View.INVISIBLE
+            }
             binding.rcvAllNotes.layoutManager =
                 StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             notesAdapter = NotesAdapter(requireContext(), it)
             binding.rcvAllNotes.adapter = notesAdapter
+            binding.rcvAllNotes.scheduleLayoutAnimation()
         }
     }
 
@@ -196,35 +201,78 @@ class HomeFragment : Fragment() {
 
     private fun notesFiltering(p0: String?) {
         var newFilteredList = arrayListOf<Notes>()
-        if(p0 =="high" || p0 =="High"){
-            viewModel.getHighNotes().observe(viewLifecycleOwner) {
-                binding.rcvAllNotes.layoutManager =
-                    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-                notesAdapter = NotesAdapter(requireContext(), it)
-                binding.rcvAllNotes.adapter = notesAdapter
+        when (p0) {
+            "high", "High" -> {
+                viewModel.getHighNotes().observe(viewLifecycleOwner) {
+                    if(it.isEmpty()){
+                        binding.noDataImageView.visibility = View.VISIBLE
+                        binding.noDataTextView.visibility = View.VISIBLE
+                    }else{
+                        binding.noDataImageView.visibility = View.INVISIBLE
+                        binding.noDataTextView.visibility = View.INVISIBLE
+                    }
+                    binding.rcvAllNotes.layoutManager =
+                        StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                    notesAdapter = NotesAdapter(requireContext(), it)
+                    binding.rcvAllNotes.adapter = notesAdapter
+                    binding.rcvAllNotes.scheduleLayoutAnimation()
+                }
             }
-        }else if(p0 == "med" || p0 == "medium" || p0=="Med" || p0=="Medium"){
-            viewModel.getMediumNotes().observe(viewLifecycleOwner) {
-                binding.rcvAllNotes.layoutManager =
-                    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-                notesAdapter = NotesAdapter(requireContext(), it)
-                binding.rcvAllNotes.adapter = notesAdapter
+            "med", "medium", "Med", "Medium" -> {
+                viewModel.getMediumNotes().observe(viewLifecycleOwner) {
+                    if(it.isEmpty()){
+                        binding.noDataImageView.visibility = View.VISIBLE
+                        binding.noDataTextView.visibility = View.VISIBLE
+                    }else{
+                        binding.noDataImageView.visibility = View.INVISIBLE
+                        binding.noDataTextView.visibility = View.INVISIBLE
+                    }
+                    binding.rcvAllNotes.layoutManager =
+                        StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                    notesAdapter = NotesAdapter(requireContext(), it)
+                    binding.rcvAllNotes.adapter = notesAdapter
+                    binding.rcvAllNotes.scheduleLayoutAnimation()
+                }
             }
-        }else if(p0 == "low" || p0 == "Low" ){
-            viewModel.getLowNotes().observe(viewLifecycleOwner) {
-                binding.rcvAllNotes.layoutManager =
-                    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-                notesAdapter = NotesAdapter(requireContext(), it)
-                binding.rcvAllNotes.adapter = notesAdapter
+            "low", "Low" -> {
+                viewModel.getLowNotes().observe(viewLifecycleOwner) {
+                    if(it.isEmpty()){
+                        binding.noDataImageView.visibility = View.VISIBLE
+                        binding.noDataTextView.visibility = View.VISIBLE
+                    }else{
+                        binding.noDataImageView.visibility = View.INVISIBLE
+                        binding.noDataTextView.visibility = View.INVISIBLE
+                    }
+                    binding.rcvAllNotes.layoutManager =
+                        StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                    notesAdapter = NotesAdapter(requireContext(), it)
+                    binding.rcvAllNotes.adapter = notesAdapter
+                    binding.rcvAllNotes.scheduleLayoutAnimation()
+                }
             }
         }
-        for(i in oldMyNotes){
-
-            if(i.title.contains(p0!!) || i.notes.contains(p0!!) ){
-                newFilteredList.add(i)
+        val query ="%$p0%"
+        viewModel.searchNotes(query).observe(viewLifecycleOwner){
+            if(it.isEmpty()){
+                binding.noDataImageView.visibility = View.VISIBLE
+                binding.noDataTextView.visibility = View.VISIBLE
+            }else{
+                binding.noDataImageView.visibility = View.INVISIBLE
+                binding.noDataTextView.visibility = View.INVISIBLE
             }
-            notesAdapter.filtering(newFilteredList)
+            it?.let {
+                notesAdapter.filtering(it as ArrayList<Notes>)
+                binding.rcvAllNotes.scheduleLayoutAnimation()
+            }
         }
+        //search another way
+//        for(i in oldMyNotes){
+//
+//            if(i.title.contains(p0!!) || i.notes.contains(p0!!) ){
+//                newFilteredList.add(i)
+//            }
+//            notesAdapter.filtering(newFilteredList)
+//        }
     }
 
 }
