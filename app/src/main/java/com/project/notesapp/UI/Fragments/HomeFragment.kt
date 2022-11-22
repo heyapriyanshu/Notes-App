@@ -100,16 +100,60 @@ class HomeFragment : Fragment() {
 //    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId==R.id.menu_delete_all){
-            deleteAll()
-        }else if(item.itemId==R.id.menu_priority_high){
-            sortByHigh()
+        when (item.itemId) {
+            R.id.menu_delete_all -> {
+                deleteAll()
+            }
+            R.id.menu_priority_high -> {
+                sortByHigh()
+            }
+            R.id.menu_priority_low -> {
+                sortByLow()
+            }
+            R.id.menu_date_new ->{
+                sortByNewDate()
+            }
+            R.id.menu_date_old ->{
+                sortByOldDate()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
 
+    private fun sortByOldDate() {
+        viewModel.sortByOldDate().observe(viewLifecycleOwner) {
+            binding.rcvAllNotes.layoutManager =
+                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            notesAdapter = NotesAdapter(requireContext(), it)
+            binding.rcvAllNotes.adapter = notesAdapter
+        }
+    }
+
+    private fun sortByNewDate() {
+        viewModel.sortByNewDate().observe(viewLifecycleOwner) {
+            binding.rcvAllNotes.layoutManager =
+                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            notesAdapter = NotesAdapter(requireContext(), it)
+            binding.rcvAllNotes.adapter = notesAdapter
+        }
+    }
+
+    private fun sortByLow() {
+        viewModel.sortByLow().observe(viewLifecycleOwner) {
+            binding.rcvAllNotes.layoutManager =
+                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            notesAdapter = NotesAdapter(requireContext(), it)
+            binding.rcvAllNotes.adapter = notesAdapter
+        }
+    }
+
     private fun sortByHigh() {
-        Toast.makeText(context, "high", Toast.LENGTH_SHORT).show()
+        viewModel.sortByHigh().observe(viewLifecycleOwner) {
+            binding.rcvAllNotes.layoutManager =
+                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            notesAdapter = NotesAdapter(requireContext(), it)
+            binding.rcvAllNotes.adapter = notesAdapter
+        }
     }
 
     private fun deleteAll() {

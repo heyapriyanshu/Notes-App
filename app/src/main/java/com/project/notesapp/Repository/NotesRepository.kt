@@ -36,4 +36,10 @@ class NotesRepository(val dao: NotesDAO) {
     fun sortByPriorityLow():LiveData<List<Notes>>{
         return dao.sortByLow()
     }
+    fun sortByNewDate():LiveData<List<Notes>>{
+        return dao.sortByNewDate()
+    }
+    fun sortByOldDate():LiveData<List<Notes>>{
+        return dao.sortByOldDate()
+    }
 }

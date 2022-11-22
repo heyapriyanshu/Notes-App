@@ -28,6 +28,8 @@ class NotesViewModel(applicaton: Application): AndroidViewModel(applicaton) {
     fun getLowNotes() : LiveData<List<Notes>> = repository.getLowNotes()
     fun sortByHigh() : LiveData<List<Notes>> = repository.sortByPriorityHigh()
     fun sortByLow() : LiveData<List<Notes>> = repository.sortByPriorityLow()
+    fun sortByNewDate() : LiveData<List<Notes>> = repository.sortByNewDate()
+    fun sortByOldDate() : LiveData<List<Notes>> = repository.sortByOldDate()
 
     fun deleteNotes(id: Int){
         repository.deleteNotes(id)

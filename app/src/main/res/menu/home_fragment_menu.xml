@@ -8,12 +8,22 @@
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="always" />
 
-    <group android:checkableBehavior="single">
-        <item android:id="@+id/menu_sortBy"
+    <group >
+        <item android:id="@+id/menu_sortBy_Prioriry"
             android:title="@string/sort_by">
-                <menu>
+                <menu >
                     <item android:id="@+id/menu_priority_high" android:title="Priority High"> </item>
                     <item android:id="@+id/menu_priority_low" android:title="Priority Low"> </item>
+                </menu>
+        </item>
+
+    </group>
+    <group >
+        <item android:id="@+id/menu_sortByDate"
+            android:title="@string/sort_by_date">
+                <menu >
+                    <item android:id="@+id/menu_date_new" android:title="Older to Newer"> </item>
+                    <item android:id="@+id/menu_date_old" android:title="Newer to Older"> </item>
                 </menu>
         </item>
 
