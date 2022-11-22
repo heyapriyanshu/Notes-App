@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/fg"
-    android:elevation="10dp"
-    android:layout_margin="10dp"
+    app:cardBackgroundColor="@color/cardview_light_background"
+    android:dividerHeight="0.0px"
+    android:clipToPadding="false"
+    android:clipChildren="false"
+    app:cardElevation="5dp"
+    app:cardPreventCornerOverlap="false"
+    android:layout_margin="8dp"
+    android:divider="@android:color/transparent"
     app:cardCornerRadius="10dp">
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +26,8 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="20sp"
+            android:maxLength="20"
             android:textStyle="bold"
             android:textColor="#212524"
             android:text="Title">
@@ -30,18 +37,19 @@
             android:id="@+id/notes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:maxLength="300"
+            android:maxLines="8"
 
             android:layout_marginTop="5dp"
             android:textColor="#727A78"
-            android:text="Notes and also having dumy text to check how it is looking and also the feel of it">
+            android:text="Notes and also having dummy text to check how it is looking and also the feel of iNotes and also having dummy text to check how it is looking and also the feel of iNotes and also having dummy text to check how it is looking and also the feel of iNotes and also having dummy text to check how it is looking and also the feel of it">
 
         </TextView>
         <TextView
             android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+
             android:alpha="0.5"
             android:layout_marginTop="8dp"
             android:textColor="#212524"

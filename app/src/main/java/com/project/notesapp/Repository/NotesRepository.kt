@@ -12,9 +12,12 @@ class NotesRepository(val dao: NotesDAO) {
     fun insertNotes(notes : Notes){
         dao.insertNotes(notes)
     }
-   /* fun deleteNotes(id: Int){
+    fun deleteNotes(id: Int){
         dao.deleteNotes(id)
-    }*/
+    }
+    fun deleteAll(){
+        dao.deleteAll()
+    }
     fun updateNotes(notes: Notes){
         dao.updateNotes(notes)
     }

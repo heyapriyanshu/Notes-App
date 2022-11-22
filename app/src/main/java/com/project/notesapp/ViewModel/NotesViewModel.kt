@@ -3,13 +3,18 @@ package com.project.notesapp.ViewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.project.notesapp.Model.Notes
 import com.project.notesapp.Repository.NotesRepository
 import com.project.notesapp.database.NotesDatabase
 
 class NotesViewModel(applicaton: Application): AndroidViewModel(applicaton) {
     val repository: NotesRepository
-
+//    val emptyDatabase : MutableLiveData<Boolean> = MutableLiveData(true)
+//    fun checkEmptyDB(notesData: List<Notes>){
+//        emptyDatabase.value=notesData.isEmpty()
+//
+//    }
     init{
         var dao=NotesDatabase.getDatabaseInstance(applicaton).myNotesDao()
         repository=NotesRepository(dao)
@@ -19,9 +24,12 @@ class NotesViewModel(applicaton: Application): AndroidViewModel(applicaton) {
     }
     fun getNotes() : LiveData<List<Notes>> = repository.getAllNotes()
 
-   /* fun deleteNotes(id: Int){
+    fun deleteNotes(id: Int){
         repository.deleteNotes(id)
-    }*/
+    }
+    fun deleteAllNotes(){
+        repository.deleteAll()
+    }
     fun updateNotes(notes: Notes){
         repository.updateNotes(notes)
     }

@@ -7,15 +7,27 @@ import com.project.notesapp.Model.Notes
 @Dao
 interface NotesDAO {
 
-    @Query("SELECT * FROM NOTES ORDER BY ID DESC")
+    @Query("SELECT * FROM NOTES ORDER BY ID ASC")
     fun getNotes(): LiveData<List<Notes>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertNotes(notes: Notes)
 
-   /* @Query("DELETE FROM Notes WHERE id=:id")
+    @Query("DELETE FROM Notes WHERE id=:id")
     fun deleteNotes(id:Int)
-*/
+
+    @Query("DELETE FROM NOTES")
+    fun deleteAll()
+
     @Update
     fun updateNotes(notes: Notes)
+
+    @Query("SELECT * FROM NOTES WHERE prority=1")
+    fun getLowNotes() :LiveData<List<Notes>>
+
+    @Query("SELECT * FROM NOTES WHERE prority=2")
+    fun getMediumNotes() :LiveData<List<Notes>>
+
+    @Query("SELECT * FROM NOTES WHERE prority=3")
+    fun getHighNotes() :LiveData<List<Notes>>
 }

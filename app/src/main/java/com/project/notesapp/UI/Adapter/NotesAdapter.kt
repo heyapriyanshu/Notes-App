@@ -15,6 +15,7 @@ class NotesAdapter(val requireContext: Context, val notesList: List<Notes>):
     RecyclerView.Adapter<NotesAdapter.notesViewHolder>() {
     class notesViewHolder(val binding: ItemNotesBinding):RecyclerView.ViewHolder(binding.root) {
 
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): notesViewHolder {

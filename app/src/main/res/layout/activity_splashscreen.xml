@@ -1,40 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-
-    android:background="@color/bg"
+    android:background="@color/purple_500"
     android:layout_height="match_parent"
     tools:context=".SplashScreen">
     <ImageView
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="100dp"
-
-        android:src="@drawable/notes"
-        android:scaleType="fitCenter"
-        android:layout_width="200dp"
-        android:layout_height="300dp">
-
-    </ImageView>
-    <TextView
-        android:text="Notes App"
-        android:layout_gravity="center_horizontal"
-        android:textSize="50sp"
-        android:textAlignment="center"
-        android:fontFamily="casual"
-        android:textColor="@color/white"
-        android:layout_width="match_parent"
+        android:id="@+id/splashImg"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_logo_light"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-    </TextView>
+    </ImageView>
+
     <ProgressBar
-        android:layout_marginTop="50dp"
+        android:layout_alignParentBottom="true"
         android:theme="@style/ProgressBar"
-        android:layout_gravity="center"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="190dp"
         android:layout_width="35dp"
         android:layout_height="35dp">
 
     </ProgressBar>
-</LinearLayout>
+</RelativeLayout>

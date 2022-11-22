@@ -23,6 +23,11 @@
             android:layout_height="60dp">
 
         </EditText>
+        <HorizontalScrollView
+            android:foregroundGravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -111,6 +116,7 @@
             </LinearLayout>
 
         </LinearLayout>
+        </HorizontalScrollView>
         <EditText
             android:id="@+id/editNotes"
             android:hint="Description"
@@ -130,16 +136,6 @@
 
 
     </LinearLayout>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_gravity="right|bottom"
-        android:id="@+id/btnEditNotes"
-        android:layout_margin="14dp"
-        android:backgroundTint="@color/fg"
-        android:src="@drawable/ic_baseline_check_24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 
 </FrameLayout>

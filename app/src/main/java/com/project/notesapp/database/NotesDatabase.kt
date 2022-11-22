@@ -13,7 +13,7 @@ abstract class NotesDatabase:RoomDatabase(){
 
     //Java-> static Kotlin-> Companion object
     companion object{
-        @Volatile //easy accessible
+        @Volatile //easy accessible or visibile to other threads
         var INSTANCE:NotesDatabase?=null  //nullable so that we can store null value
 
         fun getDatabaseInstance(context: Context):NotesDatabase{
