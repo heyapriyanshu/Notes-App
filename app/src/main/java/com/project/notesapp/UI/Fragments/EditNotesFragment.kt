@@ -1,5 +1,6 @@
 package com.project.notesapp.UI.Fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.*
@@ -71,12 +72,28 @@ class EditNotesFragment : Fragment() {
     }
 
     private fun deleteSelectedNote() {
-        var id = oldNotes.data.id
-        if (id != null) {
-            viewModel.deleteNotes(id)
-        }
-        Toast.makeText(context, "Item deleted", Toast.LENGTH_SHORT).show()
-        findNavController().navigate(R.id.action_editNotesFragment2_to_homeFragment2)
+
+
+        val builder = AlertDialog.Builder(context)
+        builder.setMessage("Are you sure you want to Delete?")
+            .setCancelable(false)
+            .setPositiveButton("Yes") { dialog, id ->
+                // Delete selected note from database
+                var id = oldNotes.data.id
+                if (id != null) {
+                    viewModel.deleteNotes(id)
+                }
+                Toast.makeText(context, "Item deleted", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_editNotesFragment2_to_homeFragment2)
+
+            }
+            .setNegativeButton("No") { dialog, id ->
+                // Dismiss the dialog
+                dialog.dismiss()
+            }
+        val alert = builder.create()
+        alert.show()
+
     }
 
     private fun updateNotes() {

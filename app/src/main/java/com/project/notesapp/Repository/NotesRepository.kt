@@ -21,4 +21,19 @@ class NotesRepository(val dao: NotesDAO) {
     fun updateNotes(notes: Notes){
         dao.updateNotes(notes)
     }
+    fun getHighNotes():LiveData<List<Notes>>{
+        return dao.getHighNotes()
+    }
+    fun getMediumNotes():LiveData<List<Notes>>{
+        return dao.getMediumNotes()
+    }
+    fun getLowNotes():LiveData<List<Notes>>{
+        return dao.getLowNotes()
+    }
+    fun sortByPriorityHigh():LiveData<List<Notes>>{
+        return dao.sortByHigh()
+    }
+    fun sortByPriorityLow():LiveData<List<Notes>>{
+        return dao.sortByLow()
+    }
 }

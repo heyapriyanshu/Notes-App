@@ -22,6 +22,12 @@ interface NotesDAO {
     @Update
     fun updateNotes(notes: Notes)
 
+    @Query("SELECT * FROM NOTES ORDER BY prority desc")
+    fun sortByHigh() : LiveData<List<Notes>>
+
+    @Query("SELECT * FROM NOTES ORDER BY prority asc")
+    fun sortByLow() : LiveData<List<Notes>>
+
     @Query("SELECT * FROM NOTES WHERE prority=1")
     fun getLowNotes() :LiveData<List<Notes>>
 

@@ -9,7 +9,9 @@
         android:icon="@drawable/ic_save" />
     <item android:id="@+id/update_menu_delete"
         android:title="@string/delete"
-        app:showAsAction="never">
+        app:showAsAction="ifRoom"
+        android:iconTint="@color/lightGray"
+        android:icon="@drawable/ic_delete">
 
     </item>
 </menu>

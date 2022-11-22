@@ -2,20 +2,16 @@ package com.project.notesapp.UI.Fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.*
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.*
-import com.google.android.material.snackbar.Snackbar
 import com.project.notesapp.Model.Notes
 import com.project.notesapp.R
 import com.project.notesapp.UI.Adapter.NotesAdapter
-import com.project.notesapp.UI.Adapter.SwipeToDelete
 import com.project.notesapp.ViewModel.NotesViewModel
 import com.project.notesapp.databinding.FragmentHomeBinding
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
@@ -24,7 +20,10 @@ class HomeFragment : Fragment() {
 
     lateinit var binding : FragmentHomeBinding //floating button
   //  private val adapter: NotesAdapter by lazy { NotesAdapter() }
+
     val viewModel : NotesViewModel by viewModels()
+    var oldMyNotes = arrayListOf<Notes>()
+    lateinit var notesAdapter:NotesAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,8 +34,10 @@ class HomeFragment : Fragment() {
         binding=FragmentHomeBinding.inflate(layoutInflater,container,false)
 
         viewModel.getNotes().observe(viewLifecycleOwner) { notesList ->
+            oldMyNotes = notesList as ArrayList<Notes>
             binding.rcvAllNotes.layoutManager=StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
-            binding.rcvAllNotes.adapter=NotesAdapter(requireContext(),notesList)
+            notesAdapter=NotesAdapter(requireContext(),notesList)
+            binding.rcvAllNotes.adapter=notesAdapter
 
          //   viewModel.checkEmptyDB(notesList)
 
@@ -101,14 +102,20 @@ class HomeFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId==R.id.menu_delete_all){
             deleteAll()
+        }else if(item.itemId==R.id.menu_priority_high){
+            sortByHigh()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun sortByHigh() {
+        Toast.makeText(context, "high", Toast.LENGTH_SHORT).show()
     }
 
     private fun deleteAll() {
 
         val builder = AlertDialog.Builder(context)
-        builder.setMessage("Are you sure you want to Delete?")
+        builder.setMessage("Are you sure you want to delete all the notes?")
             .setCancelable(false)
             .setPositiveButton("Yes") { dialog, id ->
                 // Delete selected note from database
@@ -126,6 +133,54 @@ class HomeFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.home_fragment_menu,menu)
 
+        val item = menu.findItem(R.id.menu_search)
+        val searchView = item.actionView as SearchView
+        searchView.queryHint = "Type to search..."
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                notesFiltering(p0)
+                return true
+            }
+
+        })
+
+    }
+
+    private fun notesFiltering(p0: String?) {
+        var newFilteredList = arrayListOf<Notes>()
+        if(p0 =="high" || p0 =="High"){
+            viewModel.getHighNotes().observe(viewLifecycleOwner) {
+                binding.rcvAllNotes.layoutManager =
+                    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                notesAdapter = NotesAdapter(requireContext(), it)
+                binding.rcvAllNotes.adapter = notesAdapter
+            }
+        }else if(p0 == "med" || p0 == "medium" || p0=="Med" || p0=="Medium"){
+            viewModel.getMediumNotes().observe(viewLifecycleOwner) {
+                binding.rcvAllNotes.layoutManager =
+                    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                notesAdapter = NotesAdapter(requireContext(), it)
+                binding.rcvAllNotes.adapter = notesAdapter
+            }
+        }else if(p0 == "low" || p0 == "Low" ){
+            viewModel.getLowNotes().observe(viewLifecycleOwner) {
+                binding.rcvAllNotes.layoutManager =
+                    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                notesAdapter = NotesAdapter(requireContext(), it)
+                binding.rcvAllNotes.adapter = notesAdapter
+            }
+        }
+        for(i in oldMyNotes){
+
+            if(i.title.contains(p0!!) || i.notes.contains(p0!!) ){
+                newFilteredList.add(i)
+            }
+            notesAdapter.filtering(newFilteredList)
+        }
     }
 
 }
