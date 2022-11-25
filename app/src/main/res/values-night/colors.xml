@@ -15,11 +15,11 @@
     <color name="fg">#D6E4E5</color>
     <color name="green">#34b532</color>
     <color name="fgPurple">#D6E1F8</color>
-    <color name="textColor">#212524</color>
-    <color name="textColorLight">#727A78</color>
-    <color name="editTxtBG">@color/cardview_light_background</color>
-    <color name="editTxtBGSame">@color/lightGray</color>
-    <color name="editTxtBGOpp">@color/cardview_dark_background</color>
+    <color name="textColor">@color/lightGray</color>
+    <color name="textColorLight">#BCC8C5</color>
+    <color name="editTxtBG">@color/cardview_dark_background</color>
+    <color name="editTxtBGSame">@color/darkGray</color>
+    <color name="editTxtBGOpp">@color/cardview_light_background</color>
     <color name="red"> #bb1e10</color>
     <color name="yellow">#f7b500</color>
 </resources>

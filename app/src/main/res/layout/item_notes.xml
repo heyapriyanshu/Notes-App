@@ -8,7 +8,7 @@
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/cardview_light_background"
+    app:cardBackgroundColor="@color/editTxtBG"
     android:dividerHeight="0.0px"
     android:clipToPadding="false"
     android:clipChildren="false"
@@ -29,7 +29,7 @@
             android:textSize="20sp"
             android:maxLength="20"
             android:textStyle="bold"
-            android:textColor="#212524"
+            android:textColor="@color/textColor"
             android:text="Title">
 
         </TextView>
@@ -41,7 +41,7 @@
             android:maxLines="8"
 
             android:layout_marginTop="5dp"
-            android:textColor="#727A78"
+            android:textColor="@color/textColorLight"
             android:text="Notes and also having dummy text to check how it is looking and also the feel of iNotes and also having dummy text to check how it is looking and also the feel of iNotes and also having dummy text to check how it is looking and also the feel of iNotes and also having dummy text to check how it is looking and also the feel of it">
 
         </TextView>
@@ -52,7 +52,7 @@
 
             android:alpha="0.5"
             android:layout_marginTop="8dp"
-            android:textColor="#212524"
+            android:textColor="@color/textColor"
             android:text="15 September 2022">
 
         </TextView>
